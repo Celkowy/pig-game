@@ -1,5 +1,5 @@
 import renderBoard from './UI/Board/Board.js'
-import One from './UI/Dice/one.js'
+import One from './UI/Dice/One.js'
 import Two from './UI/Dice/Two.js'
 import Three from './UI/Dice/Three.js'
 import Four from './UI/Dice/Four.js'
