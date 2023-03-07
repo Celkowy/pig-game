@@ -69,14 +69,6 @@ hold.addEventListener('click', () => {
 
 rollDice.addEventListener('click', () => {
   const dice = document.querySelector('.dice-wrap')
-  const singleDice = document.querySelector('.dice')
-  // if (document.body.contains(singleDice)) {
-  //   manageStyle('add', 'dice-scale', singleDice, undefined)
-  //   setTimeout(() => {
-  //     manageStyle('remove', 'dice-scale', undefined, singleDice)
-  //   }, 100)
-  // }
-  console.log(singleDice)
   const random = randomizeNumber(1, 7)
 
   if (random === 1) {
@@ -144,7 +136,7 @@ function updateDiceUi(dice, random) {
 }
 
 function manageStyle(option, property, toAdd, toRemove) {
-  //add remove both
+  //OPTIONS - add/remove/both
   if (option === 'add') {
     toAdd.classList.add(`${property}`)
   } else if (option === 'remove') {
