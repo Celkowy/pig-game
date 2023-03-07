@@ -69,6 +69,14 @@ hold.addEventListener('click', () => {
 
 rollDice.addEventListener('click', () => {
   const dice = document.querySelector('.dice-wrap')
+  const singleDice = document.querySelector('.dice')
+  // if (document.body.contains(singleDice)) {
+  //   manageStyle('add', 'dice-scale', singleDice, undefined)
+  //   setTimeout(() => {
+  //     manageStyle('remove', 'dice-scale', undefined, singleDice)
+  //   }, 100)
+  // }
+  console.log(singleDice)
   const random = randomizeNumber(1, 7)
 
   if (random === 1) {
@@ -85,9 +93,23 @@ rollDice.addEventListener('click', () => {
     playerSwitch = !playerSwitch
   }
   if (playerSwitch) {
+    if (+playerOneCurrent.textContent !== 0) {
+      manageStyle('add', 'scale', playerOneCurrent, undefined)
+      setTimeout(() => {
+        manageStyle('remove', 'scale', undefined, playerOneCurrent)
+      }, 100)
+    }
+
     if (random !== 1) updateValue('textContent', playerOneCurrent, +playerOneCurrent.textContent + random)
     updateDiceUi(dice, random)
   } else if (!playerSwitch) {
+    if (+playerTwoCurrent.textContent !== 0) {
+      manageStyle('add', 'scale', playerTwoCurrent, undefined)
+      setTimeout(() => {
+        manageStyle('remove', 'scale', undefined, playerTwoCurrent)
+      }, 100)
+    }
+
     if (random !== 1) updateValue('textContent', playerTwoCurrent, +playerTwoCurrent.textContent + random)
     updateDiceUi(dice, random)
   }

@@ -81,6 +81,23 @@ body {
   font-size: 24px;
 }
 
+.player-one-current.scale {
+  animation: scale 0.3s;
+}
+
+.player-two-current.scale {
+  animation: scale 0.3s;
+}
+
+@keyframes scale {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(2);
+  }
+}
+
 .player-one-section,
 .player-two-section {
   display: flex;
@@ -142,6 +159,16 @@ h1 {
   height: 100px;
   background-color: white;
   border-radius: 7px;
+  animation: dice-scale 0.1s ease;
+}
+
+@keyframes dice-scale {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.03);
+  }
 }
 
 span {
