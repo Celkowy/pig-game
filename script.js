@@ -54,12 +54,12 @@ hold.addEventListener('click', () => {
   ;[playerOneCurrent, playerTwoCurrent].forEach(current => updateValue('textContent', current, 0))
   playerSwitch = !playerSwitch
 
-  if (+playerOneScore.textContent >= 10) {
+  if (+playerOneScore.textContent >= 100) {
     manageStyle('both', 'opacity', playerTwoWrapper, playerOneWrapper)
     manageStyle('add', 'win', playerOneWrapper)
     manageStyle('add', 'bold', h1PlayerOne)
     ;[rollDice, hold].forEach(button => (button.disabled = true))
-  } else if (+playerTwoScore.textContent >= 10) {
+  } else if (+playerTwoScore.textContent >= 100) {
     manageStyle('both', 'opacity', playerOneWrapper, playerTwoWrapper)
     manageStyle('add', 'win', playerTwoWrapper)
     manageStyle('add', 'bold', h1PlayerTwo)
