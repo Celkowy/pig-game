@@ -22,10 +22,10 @@ export default function renderBoard() {
     </div>
   </div>
 
-  <button class="btn new-game">NEW GAME</button>
+  <button class="btn new-game">🔄 NEW GAME</button>
   <div class="dice-wrap"></div>
-  <button class="btn roll-dice">ROLL DICE</button>
-  <button class="btn hold"> HOLD</button>
+  <button class="btn roll-dice">🎲 ROLL DICE</button>
+  <button class="btn hold">📥 HOLD</button>
 </div>
   `
 }
