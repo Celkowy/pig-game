@@ -39,18 +39,30 @@ newGame.addEventListener('click', () => {
 })
 
 hold.addEventListener('click', () => {
+  const scoreOneChange = +playerOneScore.textContent
+  const scoreTwoChange = +playerTwoScore.textContent
   if (playerSwitch) {
     manageStyle('both', 'opacity', playerOneWrapper, playerTwoWrapper)
     manageStyle('both', 'bold', h1PlayerTwo, h1PlayerOne)
+    updateValue('textContent', playerOneScore, +playerOneCurrent.textContent + +playerOneScore.textContent)
+    if (scoreOneChange !== +playerOneScore.textContent) {
+      manageStyle('add', 'scale', playerOneScore, undefined)
+      setTimeout(() => {
+        manageStyle('remove', 'scale', undefined, playerOneScore)
+      }, 100)
+    }
   } else {
     manageStyle('both', 'opacity', playerTwoWrapper, playerOneWrapper)
     manageStyle('both', 'bold', h1PlayerOne, h1PlayerTwo)
-  }
-  if (playerSwitch) {
-    updateValue('textContent', playerOneScore, +playerOneCurrent.textContent + +playerOneScore.textContent)
-  } else {
     updateValue('textContent', playerTwoScore, +playerTwoCurrent.textContent + +playerTwoScore.textContent)
+    if (scoreTwoChange !== +playerTwoScore.textContent) {
+      manageStyle('add', 'scale', playerTwoScore, undefined)
+      setTimeout(() => {
+        manageStyle('remove', 'scale', undefined, playerTwoScore)
+      }, 100)
+    }
   }
+
   ;[playerOneCurrent, playerTwoCurrent].forEach(current => updateValue('textContent', current, 0))
   playerSwitch = !playerSwitch
 
