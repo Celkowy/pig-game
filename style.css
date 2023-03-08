@@ -280,3 +280,80 @@ span {
 .bold {
   font-weight: bold;
 }
+
+@media (max-width: 900px) {
+  .board {
+    position: initial;
+    width: 300px;
+    height: 425px;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .player-one-wrapper,
+  .player-two-wrapper {
+    width: 100%;
+  }
+
+  .player-one-wrapper {
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 7px;
+    margin-bottom: 80px;
+  }
+
+  .player-two-wrapper {
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 7px;
+  }
+
+  .player-one-section,
+  .player-two-section {
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-evenly;
+  }
+
+  .current-wrap {
+    padding: 10px 25px;
+  }
+
+  h1 {
+    font-size: 32px;
+    margin-bottom: 0;
+  }
+
+  .player-one-score,
+  .player-two-score {
+    font-size: 54px;
+  }
+
+  .dice {
+    width: 75px;
+    height: 75px;
+  }
+
+  .dice-wrap {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .btn {
+    width: 170px;
+    padding: 15px 20px;
+  }
+
+  .roll-dice {
+    top: 85%;
+    left: 75%;
+  }
+
+  .hold {
+    top: 85%;
+    left: 25%;
+  }
+
+  .new-game {
+    top: 7%;
+  }
+}

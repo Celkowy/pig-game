@@ -135,14 +135,14 @@ function updateDiceUi(dice, random) {
   }
 }
 
-function manageStyle(option, property, toAdd, toRemove) {
+function manageStyle(option, className, toAdd, toRemove) {
   //OPTIONS - add/remove/both
   if (option === 'add') {
-    toAdd.classList.add(`${property}`)
+    toAdd.classList.add(`${className}`)
   } else if (option === 'remove') {
-    toRemove.classList.remove(`${property}`)
+    toRemove.classList.remove(`${className}`)
   } else if (option === 'both') {
-    toAdd.classList.add(`${property}`)
-    toRemove.classList.remove(`${property}`)
+    toAdd.classList.add(`${className}`)
+    toRemove.classList.remove(`${className}`)
   }
 }
