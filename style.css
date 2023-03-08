@@ -89,6 +89,14 @@ body {
   animation: scale 0.3s;
 }
 
+.player-one-score.scale {
+  animation: scale 0.3s;
+}
+
+.player-two-score.scale {
+  animation: scale 0.3s;
+}
+
 @keyframes scale {
   from {
     transform: scale(1);
@@ -298,7 +306,7 @@ span {
   .player-one-wrapper {
     border-bottom-left-radius: 0;
     border-top-right-radius: 7px;
-    margin-bottom: 80px;
+    margin-bottom: 100px;
   }
 
   .player-two-wrapper {
@@ -341,19 +349,22 @@ span {
   .btn {
     width: 170px;
     padding: 15px 20px;
+    font-size: 16px;
   }
 
   .roll-dice {
-    top: 85%;
+    bottom: 5%;
+    top: unset;
     left: 75%;
   }
 
   .hold {
-    top: 85%;
+    top: unset;
+    bottom: 5%;
     left: 25%;
   }
 
   .new-game {
-    top: 7%;
+    top: 5%;
   }
 }
