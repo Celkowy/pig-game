@@ -24,6 +24,7 @@ const hold = document.querySelector('.hold')
 const newGame = document.querySelector('.new-game')
 
 newGame.addEventListener('click', () => {
+  //reset all
   updateValue('textContent', playerOneCurrent, 0)
   updateValue('textContent', playerTwoCurrent, 0)
   updateValue('textContent', playerOneScore, 0)
@@ -41,31 +42,36 @@ newGame.addEventListener('click', () => {
 hold.addEventListener('click', () => {
   const scoreOneChange = +playerOneScore.textContent
   const scoreTwoChange = +playerTwoScore.textContent
-  if (playerSwitch) {
-    manageStyle('both', 'opacity', playerOneWrapper, playerTwoWrapper)
-    manageStyle('both', 'bold', h1PlayerTwo, h1PlayerOne)
-    updateValue('textContent', playerOneScore, +playerOneCurrent.textContent + +playerOneScore.textContent)
-    if (scoreOneChange !== +playerOneScore.textContent) {
-      manageStyle('add', 'scale', playerOneScore, undefined)
-      setTimeout(() => {
-        manageStyle('remove', 'scale', undefined, playerOneScore)
-      }, 100)
-    }
-  } else {
-    manageStyle('both', 'opacity', playerTwoWrapper, playerOneWrapper)
-    manageStyle('both', 'bold', h1PlayerOne, h1PlayerTwo)
-    updateValue('textContent', playerTwoScore, +playerTwoCurrent.textContent + +playerTwoScore.textContent)
-    if (scoreTwoChange !== +playerTwoScore.textContent) {
-      manageStyle('add', 'scale', playerTwoScore, undefined)
-      setTimeout(() => {
-        manageStyle('remove', 'scale', undefined, playerTwoScore)
-      }, 100)
-    }
+
+  manageStyle(
+    'both',
+    'opacity',
+    playerSwitch ? playerOneWrapper : playerTwoWrapper,
+    playerSwitch ? playerTwoWrapper : playerOneWrapper
+  )
+
+  manageStyle('both', 'bold', playerSwitch ? h1PlayerTwo : h1PlayerOne, playerSwitch ? h1PlayerOne : h1PlayerTwo)
+
+  updateValue(
+    'textContent',
+    playerSwitch ? playerOneScore : playerTwoScore,
+    playerSwitch
+      ? +playerOneCurrent.textContent + +playerOneScore.textContent
+      : +playerTwoCurrent.textContent + +playerTwoScore.textContent
+  )
+
+  //add animation on player score ONLY if score !== 0 && score has changed
+  if (playerSwitch && scoreOneChange !== +playerOneScore.textContent) {
+    addScaleAnimation(playerOneScore)
+  } else if (!playerSwitch && scoreTwoChange !== +playerTwoScore.textContent) {
+    addScaleAnimation(playerTwoScore)
   }
 
+  //clear current values on hold click
   ;[playerOneCurrent, playerTwoCurrent].forEach(current => updateValue('textContent', current, 0))
   playerSwitch = !playerSwitch
 
+  //check if win
   if (+playerOneScore.textContent >= 100) {
     manageStyle('both', 'opacity', playerTwoWrapper, playerOneWrapper)
     manageStyle('add', 'win', playerOneWrapper)
@@ -85,44 +91,24 @@ rollDice.addEventListener('click', () => {
 
   if (random === 1) {
     updateDiceUi(dice, 1)
-    if (playerSwitch) {
-      manageStyle('both', 'opacity', playerOneWrapper, playerTwoWrapper)
-      manageStyle('both', 'bold', h1PlayerTwo, h1PlayerOne)
-    } else {
-      manageStyle('both', 'opacity', playerTwoWrapper, playerOneWrapper)
-      manageStyle('both', 'bold', h1PlayerOne, h1PlayerTwo)
-    }
-
+    manageStyle(
+      'both',
+      'opacity',
+      playerSwitch ? playerOneWrapper : playerTwoWrapper,
+      playerSwitch ? playerTwoWrapper : playerOneWrapper
+    )
+    manageStyle('both', 'bold', playerSwitch ? h1PlayerTwo : h1PlayerOne, playerSwitch ? h1PlayerOne : h1PlayerTwo)
     ;[playerOneCurrent, playerTwoCurrent].forEach(current => updateValue('textContent', current, 0))
     playerSwitch = !playerSwitch
   }
 
-  if (playerSwitch) {
-    if (+playerOneCurrent.textContent !== 0) {
-      manageStyle('add', 'scale', playerOneCurrent, undefined)
-      setTimeout(() => {
-        manageStyle('remove', 'scale', undefined, playerOneCurrent)
-      }, 100)
-    }
-
-    if (random !== 1) {
-      updateValue('textContent', playerOneCurrent, +playerOneCurrent.textContent + random)
-      manageStyle('add', 'scale', playerOneCurrent, undefined)
-      setTimeout(() => {
-        manageStyle('remove', 'scale', undefined, playerOneCurrent)
-      }, 100)
-    }
-    updateDiceUi(dice, random)
-  } else if (!playerSwitch) {
-    if (random !== 1) {
-      updateValue('textContent', playerTwoCurrent, +playerTwoCurrent.textContent + random)
-      manageStyle('add', 'scale', playerTwoCurrent, undefined)
-      setTimeout(() => {
-        manageStyle('remove', 'scale', undefined, playerTwoCurrent)
-      }, 100)
-    }
-    updateDiceUi(dice, random)
-  }
+  addScaleAnimation(playerSwitch ? playerOneCurrent : playerTwoCurrent)
+  updateValue(
+    'textContent',
+    playerSwitch ? playerOneCurrent : playerTwoCurrent,
+    playerSwitch ? +playerOneCurrent.textContent + random : +playerTwoCurrent.textContent + random
+  )
+  updateDiceUi(dice, random)
 })
 
 function randomizeNumber(min, max) {
@@ -163,4 +149,11 @@ function manageStyle(option, className, toAdd, toRemove) {
     toAdd.classList.add(`${className}`)
     toRemove.classList.remove(`${className}`)
   }
+}
+
+function addScaleAnimation(elementToAnimate) {
+  manageStyle('add', 'scale', elementToAnimate, undefined)
+  setTimeout(() => {
+    manageStyle('remove', 'scale', undefined, elementToAnimate)
+  }, 100)
 }

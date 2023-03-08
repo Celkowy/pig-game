@@ -27,5 +27,5 @@ export default function renderBoard() {
   <button class="btn roll-dice">🎲 ROLL DICE</button>
   <button class="btn hold">📥 HOLD</button>
 </div>
-  `
+`
 }
