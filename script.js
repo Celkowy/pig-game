@@ -96,6 +96,7 @@ rollDice.addEventListener('click', () => {
     ;[playerOneCurrent, playerTwoCurrent].forEach(current => updateValue('textContent', current, 0))
     playerSwitch = !playerSwitch
   }
+
   if (playerSwitch) {
     if (+playerOneCurrent.textContent !== 0) {
       manageStyle('add', 'scale', playerOneCurrent, undefined)
@@ -104,17 +105,22 @@ rollDice.addEventListener('click', () => {
       }, 100)
     }
 
-    if (random !== 1) updateValue('textContent', playerOneCurrent, +playerOneCurrent.textContent + random)
+    if (random !== 1) {
+      updateValue('textContent', playerOneCurrent, +playerOneCurrent.textContent + random)
+      manageStyle('add', 'scale', playerOneCurrent, undefined)
+      setTimeout(() => {
+        manageStyle('remove', 'scale', undefined, playerOneCurrent)
+      }, 100)
+    }
     updateDiceUi(dice, random)
   } else if (!playerSwitch) {
-    if (+playerTwoCurrent.textContent !== 0) {
+    if (random !== 1) {
+      updateValue('textContent', playerTwoCurrent, +playerTwoCurrent.textContent + random)
       manageStyle('add', 'scale', playerTwoCurrent, undefined)
       setTimeout(() => {
         manageStyle('remove', 'scale', undefined, playerTwoCurrent)
       }, 100)
     }
-
-    if (random !== 1) updateValue('textContent', playerTwoCurrent, +playerTwoCurrent.textContent + random)
     updateDiceUi(dice, random)
   }
 })
