@@ -1,10 +1,9 @@
 import renderBoard from './UI/Board/Board.js'
-import One from './UI/Dice/One.js'
-import Two from './UI/Dice/Two.js'
-import Three from './UI/Dice/Three.js'
-import Four from './UI/Dice/Four.js'
-import Five from './UI/Dice/Five.js'
-import Six from './UI/Dice/Six.js'
+import { addScaleAnimation } from './functions.js'
+import { manageStyle } from './functions.js'
+import { updateDiceUi } from './functions.js'
+import { updateValue } from './functions.js'
+import { randomizeNumber } from './functions.js'
 
 const board = document.querySelector('body')
 //Create the board UI
@@ -61,10 +60,9 @@ hold.addEventListener('click', () => {
   )
 
   //add animation on player score ONLY if score !== 0 && score has changed
-  if (playerSwitch && scoreOneChange !== +playerOneScore.textContent) {
-    addScaleAnimation(playerOneScore)
-  } else if (!playerSwitch && scoreTwoChange !== +playerTwoScore.textContent) {
-    addScaleAnimation(playerTwoScore)
+  const [scoreChange, scoreEl] = playerSwitch ? [scoreOneChange, playerOneScore] : [scoreTwoChange, playerTwoScore]
+  if (scoreChange !== +scoreEl.textContent) {
+    addScaleAnimation(scoreEl)
   }
 
   //clear current values on hold click
@@ -110,50 +108,3 @@ rollDice.addEventListener('click', () => {
   )
   updateDiceUi(dice, random)
 })
-
-function randomizeNumber(min, max) {
-  return Math.floor(Math.random() * (max - min) + min)
-}
-
-function updateValue(contentOrHtml, domElement, value) {
-  if (contentOrHtml === 'textContent') {
-    domElement.textContent = value
-  } else if (contentOrHtml === 'innerHTML') {
-    domElement.innerHTML = value
-  }
-}
-
-function updateDiceUi(dice, random) {
-  if (random === 1) {
-    dice.innerHTML = One()
-  } else if (random === 2) {
-    dice.innerHTML = Two()
-  } else if (random === 3) {
-    dice.innerHTML = Three()
-  } else if (random === 4) {
-    dice.innerHTML = Four()
-  } else if (random === 5) {
-    dice.innerHTML = Five()
-  } else if (random === 6) {
-    dice.innerHTML = Six()
-  }
-}
-
-function manageStyle(option, className, toAdd, toRemove) {
-  //OPTIONS - add/remove/both
-  if (option === 'add') {
-    toAdd.classList.add(`${className}`)
-  } else if (option === 'remove') {
-    toRemove.classList.remove(`${className}`)
-  } else if (option === 'both') {
-    toAdd.classList.add(`${className}`)
-    toRemove.classList.remove(`${className}`)
-  }
-}
-
-function addScaleAnimation(elementToAnimate) {
-  manageStyle('add', 'scale', elementToAnimate, undefined)
-  setTimeout(() => {
-    manageStyle('remove', 'scale', undefined, elementToAnimate)
-  }, 100)
-}
