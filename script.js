@@ -88,7 +88,6 @@ rollDice.addEventListener('click', () => {
   const random = randomizeNumber(1, 7)
 
   if (random === 1) {
-    updateDiceUi(dice, random)
     manageStyle(
       'both',
       'opacity',
