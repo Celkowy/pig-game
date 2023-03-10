@@ -88,7 +88,7 @@ rollDice.addEventListener('click', () => {
   const random = randomizeNumber(1, 7)
 
   if (random === 1) {
-    updateDiceUi(dice, 1)
+    updateDiceUi(dice, random)
     manageStyle(
       'both',
       'opacity',
@@ -98,13 +98,14 @@ rollDice.addEventListener('click', () => {
     manageStyle('both', 'bold', playerSwitch ? h1PlayerTwo : h1PlayerOne, playerSwitch ? h1PlayerOne : h1PlayerTwo)
     ;[playerOneCurrent, playerTwoCurrent].forEach(current => updateValue('textContent', current, 0))
     playerSwitch = !playerSwitch
+  } else {
+    updateValue(
+      'textContent',
+      playerSwitch ? playerOneCurrent : playerTwoCurrent,
+      playerSwitch ? +playerOneCurrent.textContent + random : +playerTwoCurrent.textContent + random
+    )
+    addScaleAnimation(playerSwitch ? playerOneCurrent : playerTwoCurrent)
   }
 
-  addScaleAnimation(playerSwitch ? playerOneCurrent : playerTwoCurrent)
-  updateValue(
-    'textContent',
-    playerSwitch ? playerOneCurrent : playerTwoCurrent,
-    playerSwitch ? +playerOneCurrent.textContent + random : +playerTwoCurrent.textContent + random
-  )
   updateDiceUi(dice, random)
 })
